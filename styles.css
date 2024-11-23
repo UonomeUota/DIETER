@@ -1,0 +1,40 @@
+/* styles.css */
+
+/* 全体のフォント設定 */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+/* ゲーム画面のスタイル */
+canvas {
+    border: 2px solid #000; /* キャンバスに黒い枠線を追加 */
+    background-color: #f0f0f0; /* キャンバスの背景色を薄いグレーに設定 */
+}
+
+/* スタート画面のテキストスタイル */
+h1 {
+    font-size: 36px;
+    color: #333; /* テキストの色をダークグレーに設定 */
+    text-align: center; /* テキストを中央揃え */
+    margin-bottom: 20px; /* テキストの下に余白を追加 */
+}
+
+/* ボタンのスタイル */
+button {
+    background-color: #4CAF50; /* ボタンの背景色を緑に設定 */
+    color: white; /* ボタンのテキスト色を白に設定 */
+    padding: 15px 32px; /* ボタンの内側の余白を設定 */
+    text-align: center; /* テキストを中央揃え */
+    text-decoration: none; /* テキストの下線を削除 */
+    display: inline-block; /* ボタンをインラインブロック要素に設定 */
+    font-size: 16px; /* フォントサイズを設定 */
+    margin: 4px 2px; /* ボタンの周りに余白を追加 */
+    cursor: pointer; /* カーソルをポインターに変更 */
+    border: none; /* ボタンの枠線を削除 */
+    border-radius: 5px; /* ボタンの角を丸くする */
+}
+
+/* ボタンのホバー効果 */
+button:hover {
+    background-color: #45a049; /* ホバー時の背景色を少し暗くする */
+}

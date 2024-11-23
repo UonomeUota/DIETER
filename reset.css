@@ -1,0 +1,38 @@
+/* reset.css */
+
+/* 全ての要素のマージンとパディングをリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HTML5の要素をブロック要素として扱う */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+    display: block;
+}
+
+/* リストのスタイルをリセット */
+ol, ul {
+    list-style: none;
+}
+
+/* テーブルのスタイルをリセット */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* a要素のスタイルをリセット */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* img要素のスタイルをリセット */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

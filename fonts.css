@@ -1,0 +1,12 @@
+/* フォントをファミコン風に変更 */
+@font-face {
+    font-family: 'CustomFont';
+    src:url('fonts/PixelMplus12-Regular.ttf') format('truetype');
+    font-display: swap;
+}
+
+.text-style {
+    font-family: 'CustomFont', sans-serif; /* カスタムフォントを使用 */
+    font-size: 32px;
+    fill: #fff; /* テキストの色 */
+}
