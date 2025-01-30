@@ -55,18 +55,26 @@ class GameScene extends Phaser.Scene {
         this.candies = []; // お菓子の配列
         this.enemies = []; // 敵の配列
         this.score = 0; // スコア
+        this.background; // 背景画像
     }
 
     preload() {
         this.load.image('player', 'png/player.png');
         this.load.image('candy', 'png/candy.png');
-        this.load.spritesheet('playerWalkingForward', 'png/player_walking_animation/walking_forward/sheet.png', { frameWidth: 64, frameHeight: 64 }); // 前進アニメーション用スプライトシートをロード
-        this.load.spritesheet('playerWalkingBackward', 'png/player_walking_animation/walking_backward/sheet.png', { frameWidth: 64, frameHeight: 64 }); // 後退アニメーション用スプライトシートをロード
-        this.load.spritesheet('playerWalkingRight', 'png/player_walking_animation/walking_right/sheet.png', { frameWidth: 64, frameHeight: 64 }); // 右移動アニメーション用スプライトシートをロード
-        this.load.spritesheet('playerWalkingLeft', 'png/player_walking_animation/walking_left/sheet.png', { frameWidth: 64, frameHeight: 64 }); // 左移動アニメーション用スプライトシートをロード
+        this.load.image('background', 'png/background_stage1.png'); // 背景画像をロード
+
+        // アニメーションPNGをスプライトシートとして読み込む
+        this.load.spritesheet('playerWalkingForward', 'png/player_walking_animation/walking_forward/sheet.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('playerWalkingBackward', 'png/player_walking_animation/walking_backward/sheet.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('playerWalkingRight', 'png/player_walking_animation/walking_right/sheet.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('playerWalkingLeft', 'png/player_walking_animation/walking_left/sheet.png', { frameWidth: 32, frameHeight: 32 });
     }
 
     create() {
+        // 背景を描画し、初期位置を設定
+        this.background = this.add.image(0, 0, 'background').setOrigin(0.5);
+        this.background.setPosition(960 / 2, 720 / 2); // 背景の中心を画面の中心に合わせる
+
         // 画面の中央にプレイヤーキャラクターを配置
         this.player = this.physics.add.sprite(config.width / 2, config.height / 2, 'player').setOrigin(0.5);
         this.player.setCollideWorldBounds(true); // プレイヤーが画面の端に衝突しないようにする
@@ -76,28 +84,28 @@ class GameScene extends Phaser.Scene {
         // アニメーションの作成
         this.anims.create({
             key: 'walkForward',
-            frames: this.anims.generateFrameNumbers('playerWalkingForward', { start: 0, end: 8 }),
+            frames: this.anims.generateFrameNumbers('playerWalkingForward', { start: 0, end: 7 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'walkBackward',
-            frames: this.anims.generateFrameNumbers('playerWalkingBackward', { start: 0, end: 8 }),
+            frames: this.anims.generateFrameNumbers('playerWalkingBackward', { start: 0, end: 7 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'walkRight',
-            frames: this.anims.generateFrameNumbers('playerWalkingRight', { start: 0, end: 8 }),
+            frames: this.anims.generateFrameNumbers('playerWalkingRight', { start: 0, end: 7 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'walkLeft',
-            frames: this.anims.generateFrameNumbers('playerWalkingLeft', { start: 0, end: 8 }),
+            frames: this.anims.generateFrameNumbers('playerWalkingLeft', { start: 0, end: 7 }),
             frameRate: 10,
             repeat: -1
         });
@@ -122,10 +130,12 @@ class GameScene extends Phaser.Scene {
             this.player.setVelocityX(-160);
             this.player.anims.play('walkLeft', true); // 左移動アニメーションを再生
             moving = true;
+            this.background.x += 2; // 背景を右に移動
         } else if (this.input.keyboard.isDown(Phaser.Input.Keyboard.KeyCodes.D)) {
             this.player.setVelocityX(160);
             this.player.anims.play('walkRight', true); // 右移動アニメーションを再生
             moving = true;
+            this.background.x -= 2; // 背景を左に移動
         } else {
             this.player.setVelocityX(0);
         }
@@ -134,10 +144,12 @@ class GameScene extends Phaser.Scene {
             this.player.setVelocityY(-160);
             this.player.anims.play('walkForward', true); // 前進アニメーションを再生
             moving = true;
+            this.background.y += 2; // 背景を下に移動
         } else if (this.input.keyboard.isDown(Phaser.Input.Keyboard.KeyCodes.S)) {
             this.player.setVelocityY(160);
             this.player.anims.play('walkBackward', true); // 後退アニメーションを再生
             moving = true;
+            this.background.y -= 2; // 背景を上に移動
         } else {
             this.player.setVelocityY(0);
         }
